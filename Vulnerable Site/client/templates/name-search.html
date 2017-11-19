@@ -1,0 +1,45 @@
+<div class="panel panel-default" id="name-search" ng-controller="nameController as nameCtrl">
+    <div class="panel-heading">
+        <img ng-controller="backController as backCtrl" src="../img/back.svg" class="back" ng-click="backCtrl.backName()" />
+        <h1 class="text-center">{{nameCtrl.results.name}}</h1>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-lg-1 col-lg-offset-2">
+                <h2>Major</h2>
+            </div>
+            <div class="col-lg-1 col-lg-offset-4">
+                <h2>Hometown</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-2">
+                <p class="text-larger">{{nameCtrl.results.major}}</p>
+            </div>
+            <div class="col-lg-3 col-lg-offset-2">
+                <p class="text-larger">{{nameCtrl.results.hometown.city + ", " + nameCtrl.results.hometown.state}}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-lg-offset-2">
+                <h2>Skills</h2>
+            </div>
+            <div class="col-lg-3 col-lg-offset-4">
+                <h2>Days Available</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-2">
+                <p class="text-larger text-list" ng-repeat="skill in nameCtrl.results.skills">{{skill}}</p>
+            </div>
+            <div class="col-lg-3 col-lg-offset-2">
+                <p class="text-larger text-list" ng-repeat="day in nameCtrl.results.daysAvailable">{{day}}</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,81 @@
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.panel-heading h1 {
+    display: inline-block;
+    width: 90%;
+}
+
+.panel-body {
+    padding-top: 0;
+}
+
+.row-header {
+    color: rgb(160, 160, 160);
+    margin-top: 0;
+}
+
+.row-header h1 {
+    margin-top: 1rem;
+}
+
+#name-row {
+    border-bottom: 1px solid silver;
+    padding-bottom: 1rem;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    display: table;
+}
+
+.container {
+    display: table-cell;
+    vertical-align: middle;
+    background: blue;
+    background: linear-gradient(-30deg, red, blue);
+}
+
+.panel {
+    margin: 0 10%;
+}
+
+#skills {
+    height: 5em;
+}
+
+.form-control {
+    height: 2em;
+}
+
+button {
+    height: 5em;
+    width: 100%;
+    font-size: 12rem;
+}
+
+button>p {
+    display: initial;
+    vertical-align: middle;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.text-list {
+    margin: 0;
+}
+
+.back {
+    width: 3%;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+.text-larger {
+    font-size: 130%;
+    color: rgb(120, 120, 120);
+}

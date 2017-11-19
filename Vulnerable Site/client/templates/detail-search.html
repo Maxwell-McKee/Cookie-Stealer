@@ -1,0 +1,32 @@
+<div class="panel panel-default" id="detail-search">
+    <div class="panel-heading">
+        <img ng-controller="backController as backCtrl" src="../img/back.svg" class="back" ng-click="backCtrl.backDetail()" />
+        <h1 class="text-center">Detail search results</h1>
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover">
+            <thead>
+                <th>Name</th>
+                <th>Major</th>
+                <th>Matching Skills</th>
+                <th>Days Available</th>
+            </thead>
+            <tbody ng-controller="detailsController as detailsCtrl">
+                <tr ng-repeat="result in detailsCtrl.results">
+                    <td>{{result.name}}</td>
+                    <td>{{result.major}}</td>
+                    <td>
+                        <p class="text-list" ng-repeat="skill in result.matchingSkills">
+                            {{skill}}
+                        </p>
+                    </td>
+                    <td>
+                        <p class="text-list" ng-repeat="day in result.daysAvailable">
+                            {{day}}
+                        </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
