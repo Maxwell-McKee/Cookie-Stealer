@@ -1,9 +1,9 @@
-<html ng-app="skills">
+<html ng-app="vulnerable">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NGTB Skills Search</title>
+    <title>Log in</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -11,7 +11,32 @@
 </head>
 
 <body>
-    <div class="container" ui-view>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>Log In</h1>
+            </div>
+            <div class="panel-body" ng-controller="logInController as logInCtrl">
+                <form>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" id="password" type="password">
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-1">
+                            <button ng-click="logInCtrl.login()" id="login" class="btn btn-primary">Log In</button>
+                        </div>
+                        <div class="col-lg-1 col-lg-offset-9">
+                            <button ng-click="logInCtrl.createNew()" id="create" class="btn btn-info">Create User</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <script src="dist/bundle.js"></script>
 </body>

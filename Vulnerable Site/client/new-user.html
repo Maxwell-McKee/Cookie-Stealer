@@ -1,0 +1,37 @@
+<html ng-app="vulnerable">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>Create a new user</h1>
+            </div>
+            <div class="panel-body">
+                <form ng-controller="newUserController as newUserCtrl">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input class="form-control" id="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-control" id="password" type="password">
+                    </div>
+                    <button ng-click="newUserCtrl.createUser()" id="login" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="dist/bundle.js"></script>
+</body>
+
+</html>

@@ -6,7 +6,7 @@ let _db;
 
 module.exports = {
     connect() {
-        _db = mongo.connect("mongodb://localhost:27017/skills-search", (err, db) => {
+        _db = mongo.connect("mongodb://localhost:27017/bad-site", (err, db) => {
             if (err) {
                 console.error("Could not connect to db, check connection");
                 process.exit();
@@ -17,7 +17,7 @@ module.exports = {
         });
     },
 
-    menus() {
-        return _db.collection("menus");
+    users() {
+        return _db.collection("users");
     }
 }

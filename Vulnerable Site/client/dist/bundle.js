@@ -7,122 +7,66 @@ var _angular2 = _interopRequireDefault(_angular);
 
 require('angular-ui-router');
 
-var _controllers = require('./controllers');
-
-var _controllers2 = _interopRequireDefault(_controllers);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_angular2.default.module('skills', ["ui.router", "skills.controllers"]).config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/menu');
+_angular2.default.module('vulnerable', []).controller('logInController', function ($http) {
+    this.createNew = function () {
+        console.log("creating new user");
+        window.location.href = "./new-user.html";
+    };
+    this.login = function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        var loginInfo = {
+            "username": username,
+            "password": password
+        };
+        $http.post('./login', loginInfo).then(function (response) {
+            var userId = response.data;
+            if (userId) {
+                console.log(userId);
+                document.cookie = "userId=" + userId;
+                window.location.href = "./posts.html";
+            } else {
+                console.log("no existing user");
+            }
+        });
+    };
+}).controller('newUserController', function ($http) {
+    this.createUser = function () {
+        var username = $("#username").val();
+        var password = $("#password").val();
+        console.log($("#username").val());
+        console.log($("#password").val());
+        var userData = {
+            "username": username,
+            "password": password
+        };
 
-    $stateProvider.state('menu', {
-        url: '/menu',
-        templateUrl: 'templates/main-menu.html'
-    }).state('nameSearch', {
-        url: '/name-search',
-        templateUrl: 'templates/name-search.html'
-    }).state('detailSearch', {
-        url: '/detail-search',
-        templateUrl: 'templates/detail-search.html'
-    });
+        $http.post('./new-user', userData).then(function (response) {
+            console.log("got response " + response.data);
+            window.location.href = "./index.html";
+        }, function (err) {
+            throw err;
+        });
+    };
+}).controller('postController', function ($scope, $http) {
+    console.log("getUser");
+    var cookie = document.cookie;
+    if (cookie.substr(0, 6) != "userId") {
+        throw "invalid cookie";
+    } else {
+        var _id = { _id: cookie.substr(7) };
+        $http.post("./find-user", _id).then(function (response) {
+            console.log("got response " + response.data);
+            $scope.user = response.data;
+        }, function (err) {
+            throw err;
+        });
+    }
 });
 
-},{"./controllers":2,"angular":5,"angular-ui-router":3}],2:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-exports.default = function () {
-    angular.module('skills', []).controller('statesController', function ($http) {
-        var _this = this;
-
-        $http.get('/states').then(function (response) {
-            _this.states = response.data;
-        });
-    }).controller('daysController', function ($http) {
-        var _this2 = this;
-
-        $http.get('/days').then(function (response) {
-            _this2.days = response.data;
-        });
-    }).controller('interfaceController', ['$state', function ($state) {
-        this.searchByName = function () {
-            console.log("Searching by name...");
-            $("#main-menu").slideUp("medium", function () {
-                console.log("Hiding main menu");
-                $state.go('nameSearch').then(function () {
-                    $("#name-search").hide().slideDown("slow", function () {
-                        console.log("Name search displayed");
-                    });
-                });
-            });
-        };
-
-        this.searchByDetail = function () {
-            console.log("Searching by detail...");
-            $("#main-menu").slideUp("medium", function () {
-                console.log("Hiding main menu");
-                $state.go('detailSearch').then(function () {
-                    $("#detail-search").hide().slideDown("slow", function () {
-                        console.log("Detail search displayed");
-                    });
-                });
-            });
-        };
-    }]).controller('detailsController', function ($http) {
-        this.results = [{
-            name: "Max",
-            major: "Computer Science",
-            matchingSkills: ["MEAN stack", "C++", "Java"],
-            daysAvailable: ["Tuesday", "Thursday", "Friday"]
-        }, {
-            name: "Ricky",
-            major: "BMIS",
-            matchingSkills: ["EasyVista", "Zach"],
-            daysAvailable: ["Tuesday", "Thursday", "Friday"]
-        }, {
-            name: "Nicole",
-            major: "Civil",
-            matchingSkills: ["Complaining", "somthing else", "lets make this list long", "push some things out"],
-            daysAvailable: ["Tuesday", "Thursday", "I only work two days a week"]
-        }];
-    }).controller('nameController', function ($http) {
-        this.results = {
-            name: "Max McKee",
-            major: "Computer Science",
-            skills: ["MEAN stack", "C++", "Java"],
-            hometown: {
-                state: "WA",
-                city: "Woodinville"
-            },
-            daysAvailable: ["Tuesday", "Thursday", "Friday"]
-        };
-    }).controller('backController', ['$state', function ($state) {
-        this.backName = function () {
-            console.log("Returning to main menu");
-            $("#name-search").slideUp("medium", function () {
-                console.log("Name search hidden");
-                $state.go("menu").then(function () {
-                    $("#main-menu").hide().slideDown("slow");
-                });
-            });
-        };
-        this.backDetail = function () {
-            console.log("Returning to main menu");
-            $("#detail-search").slideUp("medium", function () {
-                console.log("Detail search hidden");
-                $state.go("menu").then(function () {
-                    $("#main-menu").hide().slideDown("slow");
-                });
-            });
-        };
-    }]);
-};
-
-},{}],3:[function(require,module,exports){
+},{"angular":4,"angular-ui-router":2}],2:[function(require,module,exports){
 /**
  * State-based routing for AngularJS
  * @version v0.4.3
@@ -4807,7 +4751,7 @@ angular.module('ui.router.state')
   .filter('isState', $IsStateFilter)
   .filter('includedByState', $IncludedByStateFilter);
 })(window, window.angular);
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.6.6
  * (c) 2010-2017 Google, Inc. http://angularjs.org
@@ -38697,8 +38641,8 @@ $provide.value("$locale", {
 })(window);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":4}]},{},[1]);
+},{"./angular":3}]},{},[1]);
