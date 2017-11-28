@@ -70,7 +70,7 @@ angular.module('vulnerable', [])
             if (response.data != "") {
                 $scope.user = response.data;
             } else {
-                $scope.user = "Anonymous"
+                window.location.href = "./index.html"
             }
         },
         function(err) {

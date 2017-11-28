@@ -76,19 +76,6 @@ app.get('/get-posts', function(request, response) {
 
 app.post('/write-post', function(request, response) {
     console.log("Writing post");
-    if (!request.cookies.userId) {
-        mongo.posts().insertOne({
-            "poster": "Anonymous",
-            "content": request.body.content,
-            "date": new Date()
-        }, (err, r) => {
-            if (err) {
-                throw err;
-            } else {
-                response.status(200).send();
-            }
-        });
-    }
     let _id = ObjectID.createFromHexString(request.cookies.userId);
     mongo.users().findOne({
         "_id": _id

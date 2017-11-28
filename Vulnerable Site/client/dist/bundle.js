@@ -64,7 +64,7 @@ _angular2.default.module('vulnerable', []).controller('logInController', functio
         if (response.data != "") {
             $scope.user = response.data;
         } else {
-            $scope.user = "Anonymous";
+            window.location.href = "./index.html";
         }
     }, function (err) {
         throw err;
