@@ -10,6 +10,15 @@ require('angular-ui-router');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _angular2.default.module('vulnerable', []).controller('logInController', function ($http) {
+    var cookie = document.cookie;
+    if (cookie && cookie.substr(0, 6) == "userId") {
+        var userId = cookie.substr(7);
+        $http.get('./find-user').then(function (request) {
+            if (request) {
+                window.location.href = "./posts.html";
+            }
+        });
+    }
     this.createNew = function () {
         console.log("creating new user");
         window.location.href = "./new-user.html";
@@ -28,7 +37,7 @@ _angular2.default.module('vulnerable', []).controller('logInController', functio
                 document.cookie = "userId=" + userId;
                 window.location.href = "./posts.html";
             } else {
-                console.log("no existing user");
+                alert("Incorrect Username or Password");
             }
         });
     };
@@ -50,20 +59,43 @@ _angular2.default.module('vulnerable', []).controller('logInController', functio
             throw err;
         });
     };
-}).controller('postController', function ($scope, $http) {
-    console.log("getUser");
-    var cookie = document.cookie;
-    if (cookie.substr(0, 6) != "userId") {
-        throw "invalid cookie";
-    } else {
-        var _id = { _id: cookie.substr(7) };
-        $http.post("./find-user", _id).then(function (response) {
-            console.log("got response " + response.data);
+}).controller('postController', function ($scope, $sce, $http) {
+    $http.get("./find-user").then(function (response) {
+        if (response.data != "") {
             $scope.user = response.data;
+        } else {
+            $scope.user = "Anonymous";
+        }
+    }, function (err) {
+        throw err;
+    });
+
+    $http.get('./get-posts').then(function (response) {
+        $scope.posts = response.data.map(function (badPost) {
+            return {
+                "poster": badPost.poster,
+                "content": $sce.trustAsHtml(badPost.content),
+                "date": badPost.date
+            };
+        });
+    }, function (err) {
+        throw err;
+    });
+
+    $scope.writePost = function () {
+        var postBody = { "content": $("textarea").val() };
+        $http.post('./write-post', postBody).then(function (response) {
+            window.location.reload();
         }, function (err) {
+            window.location.reload();
             throw err;
         });
-    }
+    };
+
+    $scope.logOut = function () {
+        document.cookie = "userId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        window.location.href = "index.html";
+    };
 });
 
 },{"angular":4,"angular-ui-router":2}],2:[function(require,module,exports){

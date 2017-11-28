@@ -15,44 +15,24 @@
         <div class="panel panel-default" ng-controller="postController as postCtrl">
             <div class="panel-heading">
                 <h1>Posts </h1>
-                <h2>Hello {{user}}</h2>
+                <button class="btn btn-danger pull-right" ng-click="logOut()">Log Out</button>
+                <h2>Hello, {{user}}</h2>
             </div>
             <div class="panel-body">
-                <div class="post">
-                    <q>
-                        Here we can see our comments
+                <div class="post" ng-repeat="post in posts">
+                    <q ng-bind-html="post.content">
                     </q>
                     <br>
                     <em class="author">
-                        - Username, date
+                        - {{post.poster}}, {{post.date | date : "MM/dd/yyyy @ h:mm a"}}
                     </em>
-                </div>
-
-                <div class="post">
-                    <q>
-                            Here we can see our comments
-                        </q>
-                    <br>
-                    <em class="author">
-                            - Username, date
-                        </em>
-                </div>
-
-                <div class="post">
-                    <q>
-                                Here we can see our comments
-                            </q>
-                    <br>
-                    <em class="author">
-                                - Username, date
-                            </em>
                 </div>
             </div>
             <div class="panel-footer">
                 <h2>Write a new post</h2>
                 <textarea class="form-control" rows="3" placeholder="Write your comment here"></textarea>
                 <br>
-                <button class="btn btn-primary">Submit</button>
+                <button class="btn btn-primary" ng-click="writePost()">Submit</button>
             </div>
         </div>
     </div>

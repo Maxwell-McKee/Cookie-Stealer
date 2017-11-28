@@ -19,5 +19,9 @@ module.exports = {
 
     users() {
         return _db.collection("users");
+    },
+
+    posts() {
+        return _db.collection("posts");
     }
 }
