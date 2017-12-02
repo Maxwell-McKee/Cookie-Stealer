@@ -8,8 +8,8 @@ angular.module('vulnerable', [])
     if (cookie && cookie.substr(0, 6) == "userId") {
         let userId = cookie.substr(7);
         $http.get('./find-user').then(
-            function(request) {
-                if (request) {
+            function(response) {
+                if (response) {
                     window.location.href = "./posts.html";
                 }
             }

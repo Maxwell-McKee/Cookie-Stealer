@@ -75,7 +75,8 @@ app.get('/get-posts', function(request, response) {
 });
 
 app.post('/write-post', function(request, response) {
-    console.log("Writing post");
+    console.log("Writing post: ");
+    console.log(request.body.content);
     let _id = ObjectID.createFromHexString(request.cookies.userId);
     mongo.users().findOne({
         "_id": _id
@@ -100,7 +101,7 @@ app.post('/write-post', function(request, response) {
     });
 });
 
-app.listen(8080, function() {
-    console.log("Listening on port 8080");
+app.listen(80, function() {
+    console.log("Listening on port 80");
     mongo.connect();
 })

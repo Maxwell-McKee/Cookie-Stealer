@@ -13,8 +13,8 @@ _angular2.default.module('vulnerable', []).controller('logInController', functio
     var cookie = document.cookie;
     if (cookie && cookie.substr(0, 6) == "userId") {
         var userId = cookie.substr(7);
-        $http.get('./find-user').then(function (request) {
-            if (request) {
+        $http.get('./find-user').then(function (response) {
+            if (response) {
                 window.location.href = "./posts.html";
             }
         });
