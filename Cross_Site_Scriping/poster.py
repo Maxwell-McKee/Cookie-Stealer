@@ -17,7 +17,7 @@ def run(cookie="test"):
 if __name__ == "__main__":
     from sys import argv
 
-    #Command line argument for the port number
+    #Command line argument for the cookie
     if len(argv) == 2:
         run(argv[1])
     else:
